@@ -49,7 +49,7 @@ Se utilizó un gráfico interactivo de torta que permite visualizar las proporci
 - Cambiar la métrica permitió identificar categorías con alto volumen de ventas pero bajo porcentaje de inventario vendido, lo que podría indicar potencial de mejora.
 
 > _ _
-![](001.jpeg)
+![](001.JPG)
 
 ---
 
@@ -61,8 +61,8 @@ Un gráfico de dispersión permitió explorar cómo se relacionan el inventario 
 - Se detectaron datos atípicos en los que las ventas superaron significativamente al inventario disponible. Estos casos deben revisarse por posibles errores en la calidad de los datos.
 
 > _ _
-![](002.jpeg)
-![](003.jpeg)
+![](002.JPG)
+![](003.JPG)
 
 ---
 
@@ -75,7 +75,7 @@ Se analizó la relación entre la duración de las ofertas (en minutos) y el por
 - Las campañas más efectivas fueron aquellas más cortas pero lanzadas en horarios estratégicos.
 
 > _ _
-![](004.jpeg)
+![](004.JPG)
 
 ---
 
@@ -88,7 +88,7 @@ Un gráfico de barras permitió visualizar las categorías con mayor promedio de
 - La categoría con mayor inventario remanente fue **Beauty and Health**, a pesar de ser la categoría con mayores ventas tanto en valor monetario como en cantidad de unidades.
 
 > _ _
-![](005.jpeg)
+![](005.JPG)
 
 ---
 
@@ -105,7 +105,7 @@ Un gráfico de barras permitió visualizar las categorías con mayor promedio de
 - En el caso de los productos farmacéuticos, los días más efectivos son los **martes** y **lunes**.
 
 > _ _
-![](006.jpeg)
+![](006.JPG)
 
 ---
 
