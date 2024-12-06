@@ -179,19 +179,12 @@ Un gráfico de barras permitió visualizar las categorías con mayor promedio de
 4. **Calidad de los datos:**
    - Se detectaron datos atípicos en los que las ventas superaron al inventario disponible. Es importante revisarlos para garantizar la calidad del análisis.
 
----
 
-### **Recomendaciones**
-1. **Priorizar campañas en categorías clave:**
-   - Focalizar esfuerzos en **Beauty and Health**, optimizando la gestión de inventario para reducir remanentes.
-
-2. **Optimizar lanzamientos:**
-   - Diseñar campañas específicas para los horarios y días clave según categoría, como farmacéuticos los lunes y martes.
-
-3. **Revisión de datos:**
-   - Analizar y corregir los datos atípicos que afectan las métricas de ventas e inventarios.
-
-4. **Ajustar duración de las ofertas:**
    - Reducir campañas largas y concentrarse en períodos estratégicos de alto impacto.
 
 ---
+
+# ** Previsión de falla - Data Science**
+
+---
+
