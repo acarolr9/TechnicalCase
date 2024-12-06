@@ -184,7 +184,127 @@ Un gráfico de barras permitió visualizar las categorías con mayor promedio de
 
 ---
 
-# ** Previsión de falla - Data Science**
+# **Previsión de Falla - Data Science**
 
 ---
+
+## **1. Introducción**
+
+Este análisis aborda el reto de predecir fallas en dispositivos utilizando datos de telemetría diaria. El objetivo principal es construir un modelo predictivo que determine la probabilidad de falla un día antes de que ocurra, lo que permite optimizar las operaciones de mantenimiento y reducir costos.
+
+El archivo proporcionado, `full_devices.csv`, contiene datos de 9 atributos de telemetría, junto con una variable objetivo (`failure`), que indica si el dispositivo falló (`1`) o no (`0`). Se utilizaron técnicas de Machine Learning y optimización para generar un modelo robusto que puede integrarse en sistemas de monitoreo en tiempo real.
+
+---
+
+## **2. Proceso de Análisis**
+
+### **2.1 Preparación de los Datos**
+
+1. **Carga de los datos:**
+   - Se cargaron los datos desde un archivo CSV y se analizaron las características principales, como tipos de datos, valores faltantes y distribuciones.
+
+2. **Transformación y limpieza:**
+   - Se convirtieron las columnas con fechas a un formato adecuado para análisis temporal.
+   - Se imputaron valores faltantes utilizando la mediana de cada columna.
+   - Se identificaron y reemplazaron outliers mediante percentiles (`1%` y `99%`), aplicando una transformación logarítmica para corregir asimetrías.
+
+3. **División en conjuntos de entrenamiento y prueba:**
+   - Se dividieron los datos en un **80% para entrenamiento** y un **20% para prueba**, asegurando una representación balanceada.
+
+### **2.2 Análisis Exploratorio (EDA)**
+
+1. **Distribuciones de Variables:**
+   - Se analizaron las distribuciones de las variables mediante histogramas, boxplots y gráficos de dispersión.
+
+2. **Variables numéricas y categóricas:**
+   - Las variables categóricas se analizaron con conteos y proporciones.
+   - Las variables numéricas se resumieron mediante estadísticas descriptivas.
+
+> **Ilustración 1:** Distribución antes y después del tratamiento  
+_ ![](007.JPG) _
+
+---
+
+## **3. Ingeniería de Características**
+
+1. **Balanceo de Clases:**
+   - Dado el desbalance en la variable `failure`, se aplicó un método híbrido de sobremuestreo (**SMOTE**) y submuestreo para garantizar una representación más equilibrada en los datos de entrenamiento.
+
+2. **Transformación de Variables:**
+   - Las variables predictoras se transformaron utilizando **Weight of Evidence (WoE)** para capturar relaciones no lineales entre las características y la variable objetivo.
+
+---
+
+## **4. Modelado y Evaluación**
+
+### **4.1 Modelos Utilizados**
+
+1. **Línea Base: Regresión Logística**
+   - Se utilizó como referencia inicial para comparar el rendimiento de otros modelos.
+
+2. **Modelos Avanzados:**
+   - **Gradient Boosting Machine (GBM):** Mejor modelo seleccionado con un AUC de validación de **0.981** y un gap mínimo de sobreajuste.
+   - **Random Forest y XGBoost:** Ambos modelos presentaron buenos resultados, pero GBM demostró ser más robusto.
+
+> **Ilustración 2:** Resultados de la Regresión Logística  
+_ ![](008.JPG) _
+
+### **4.2 Métricas del Modelo**
+
+- **Gradient Boosting Machine (GBM):**
+  - **AUC Entrenamiento:** 0.981
+  - **AUC Prueba:** 0.973
+  - **GINI:** 0.946 (excelente capacidad discriminativa).
+
+---
+
+## **5. Optimización de Hiperparámetros**
+
+1. **Optuna:**
+   - Se utilizó Optuna para realizar una optimización multiobjetivo, maximizando el AUC y minimizando el gap de sobreajuste.
+   - El espacio de parámetros incluyó variables como el número de árboles, profundidad máxima, tasa de aprendizaje, entre otras.
+
+2. **Resultados de Optuna:**
+   - Se seleccionó el mejor conjunto de parámetros que maximizó la validación AUC con un gap mínimo.
+
+> **Ilustración 3:** Pareto Front de la Optimización  
+_ ![](009.JPG) _
+
+---
+
+## **6. Resultados**
+
+1. **Mejor Modelo:**
+   - **Gradient Boosting Machine (GBM):**
+     - **AUC Entrenamiento:** 0.981
+     - **AUC Prueba:** 0.973
+
+2. **Variables más importantes:**
+   
+   -_ ![](010.JPG) __
+
+4. **Evaluación por Deciles:**
+   - El modelo clasificó correctamente los eventos de falla con una alta precisión en los primeros deciles.
+
+   -_ ![](011.JPG) __
+
+---
+
+## **7. Conclusiones y Recomendaciones**
+
+### **Conclusiones**
+
+1. **Eficiencia del Modelo:**
+   - El modelo GBM presentó un excelente rendimiento, con una capacidad discriminativa robusta (AUC=0.973).
+
+2. **Predicción de Fallas:**
+   - El modelo puede identificar dispositivos con alta probabilidad de falla, lo que permite priorizar el mantenimiento preventivo.
+
+### **Recomendaciones**
+
+1. **Implementación Operativa:**
+   - Integrar el modelo en sistemas de monitoreo en tiempo real para generar alertas preventivas.
+
+2. **Optimización Continua:**
+   - Realizar ajustes periódicos al modelo utilizando datos nuevos y patrones emergentes.
 
