@@ -14,10 +14,22 @@ Se realizó un análisis detallado de los datos, acompañado de visualizaciones 
 ### **2.1 Comprensión de los Datos**
 
 Los datos utilizados incluyen información detallada sobre:
-- **Duración de las ofertas:** Inicio y fin de cada campaña.
-- **Inventario involucrado y remanente:** Stock disponible antes y después de cada oferta.
-- **Cantidad vendida:** Número de unidades y valor monetario vendido durante la oferta.
-- **Información temporal:** Horario y día de la semana en que se lanzaron las campañas.
+
+El dataset utilizado ofertas_relampago.csv consiste de las siguientes 13 columnas: 
+- OFFER_START_DATE: día en el que comenzo la oferta relámpago.
+- OFFER_START_DTTM: datetime en el que comenzo la oferta relámpago.
+- OFFER_FINISH_DTTM: datetime en el que finalizó la oferta relámpago.
+- OFFER_TYPE: en este caso es _lightning_deal_.
+- INVOLVED_STOCK: la cantidad de stock involucrado.
+- REMAINING_STOCK_AFTER_END: el stock remanente al finalizar la oferta. 
+- SOLD_AMOUNT: el monto vendido.
+- SOLD_QUANTITY: la cantidad de producto vendido.
+- ORIGIN: origen del producto.
+- SHIPPING_PAYMENT_TYPE: tipo de pago del envio. 
+- DOM_DOMAIN_AGG1: agrupación del tipo de producto al cual nos referiremos como _'categoría'_.
+- VERTICAL: agrupación vertical del dominio o tipo de producto al cual nos referiremos como _'clase'_.
+- DOMAIN_ID: nombre del tipo de producto. 
+
 
 **Preparación de los Datos:**
 1. **Limpieza de columnas irrelevantes o inconsistentes:**
@@ -28,6 +40,45 @@ Los datos utilizados incluyen información detallada sobre:
    - **Porcentaje vendido:** Relación entre las unidades vendidas y el inventario disponible.
    - **Duración en minutos:** Tiempo total que duró cada oferta.
    - **Variables temporales:** Hora y día de la semana en que se inició cada campaña.
+3. **Revisión base de la información:**
+> _ _
+![](0001.JPG)
+##### OFFER_START_DATE
+Las ofertas comenzaron entre el 1 de junio y el 31 de julio de 2021. Notamos una tendencia creciente en la cantidad de ofertas que inician durante las dos últimas semanas de julio, mientras que en junio ocurre lo contrario. En julio, la frecuencia máxima de ofertas fue de 1.3k, en contraste con el valor mínimo de 254 registrado 15 días antes.
+
+##### OFFER_START_DTTM
+Esta variable combina fecha y hora de inicio de cada oferta relámpago. La distribución es similar a la de `OFFER_START_DATE`, con la particularidad de que las ofertas suelen comenzar en la tarde, entre las 12:00 y las 23:00. Es interesante observar cómo la frecuencia es muy baja antes de las 11:00, para luego aumentar considerablemente después del mediodía.
+
+##### OFFER_FINISH_DTTM
+Esta variable representa las horas en que terminan las ofertas. Hay una clara tendencia a finalizar las ofertas entre la medianoche y el mediodía, lo que contrasta con el patrón de inicio. Además, la forma de la distribución es similar a la de `OFFER_START_DATE`, lo cual es esperable ya que las ofertas relámpago tienen duraciones cortas y sus inicios y finales están correlacionados.
+
+##### OFFER_TYPE
+En esta variable encontramos un único valor, como era de esperarse, ya que estamos analizando exclusivamente ofertas relámpago.
+
+##### INVOLVED_STOCK
+Refleja la cantidad de stock asignado a cada oferta. La distribución está sesgada hacia la derecha, mostrando que la mayoría de las ofertas tienen menos de 20 unidades (con una frecuencia de 21k). Los casos donde el stock excede este límite son excepcionales y podrían deberse a decisiones del vendedor, características del producto o la demanda esperada.
+
+##### REMAINING_STOCK_AFTER_END
+Se esperaba que el stock restante tras finalizar las ofertas fuera mínimo, pero encontramos valores atípicos superiores a 1000 unidades. En general, las ofertas son exitosas, ya que la mayoría de los vendedores terminan con entre 0 y 9 unidades restantes (con una frecuencia de 25k). Los valores atípicos podrían explicarse por factores como el tipo de producto, demanda, stock inicial o precio ofrecido.
+
+##### SOLD_AMOUNT
+La distribución de esta variable está sesgada a la derecha, con una tendencia a transacciones menores a 9.99 y un promedio de 12.42. Las frecuencias disminuyen significativamente para montos cercanos a 100, donde se registran solo 56 transacciones. La mayoría de las ofertas tienen montos entre 0 y 99.99, siendo los valores más frecuentes menores a 40.
+
+##### SOLD_QUANTITY
+Esta variable muestra la cantidad de productos vendidos. La frecuencia más alta corresponde a una unidad vendida, seguida por ventas de 2 a 3 unidades. Aunque el valor esperado es 10, la distribución sesgada hacia la derecha y los valores atípicos mayores a 145 desplazan la media. Estos valores atípicos representan casos particulares que podrían estar influenciados por factores como tipo de producto, mercado, demanda o perfil del comprador.
+
+##### SHIPPING_PAYMENT_TYPE
+El método de entrega puede ser `free_shipping` o `none`. La primera opción tiene una frecuencia de 27k, superando en 5k a la segunda. Esto probablemente refleja las preferencias de los consumidores respecto al pago por envío.
+
+##### DOM_DOMAIN_AGG1
+Clasifica los productos por categoría. Los productos más vendidos en este tipo de ofertas pertenecen a las categorías `HOME & DECOR` y `APPAREL ACCESSORIES`. Esta agrupación permite identificar tendencias generales según el tipo de producto.
+
+##### VERTICAL
+Agrupa las categorías de productos en clases más amplias. A diferencia de `DOM_DOMAIN_AGG1`, aquí `APP & SPORTS` supera en frecuencia a `HOME & INDUSTRY`. Este tipo de agrupación ayuda a identificar tendencias macro y luego profundizar en detalles específicos.
+
+##### DOMAIN_ID
+Identifica cada producto individualmente. Durante junio y julio de 2021, las máscaras quirúrgicas e industriales registraron la mayor frecuencia, lo cual tiene sentido considerando la obligatoriedad de su uso en Brasil debido a la pandemia de COVID-19. Además, las gráficas muestran dos tendencias: productos con frecuencias entre 100 y 500 (como auriculares, luces LED y calzado deportivo) y productos con frecuencias menores a 50.
+
 
 ---
 
