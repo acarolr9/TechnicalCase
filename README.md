@@ -62,7 +62,6 @@ Un gráfico de dispersión permitió explorar cómo se relacionan el inventario 
 
 > _ _
 ![](002.JPG)
-![](003.JPG)
 
 ---
 
@@ -75,7 +74,7 @@ Se analizó la relación entre la duración de las ofertas (en minutos) y el por
 - Las campañas más efectivas fueron aquellas más cortas pero lanzadas en horarios estratégicos.
 
 > _ _
-![](004.JPG)
+![](003.JPG)
 
 ---
 
@@ -88,7 +87,7 @@ Un gráfico de barras permitió visualizar las categorías con mayor promedio de
 - La categoría con mayor inventario remanente fue **Beauty and Health**, a pesar de ser la categoría con mayores ventas tanto en valor monetario como en cantidad de unidades.
 
 > _ _
-![](005.JPG)
+![](004.JPG)
 
 ---
 
@@ -105,6 +104,7 @@ Un gráfico de barras permitió visualizar las categorías con mayor promedio de
 - En el caso de los productos farmacéuticos, los días más efectivos son los **martes** y **lunes**.
 
 > _ _
+![](005.JPG)
 ![](006.JPG)
 
 ---
