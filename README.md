@@ -181,6 +181,117 @@ Un gráfico de barras permitió visualizar las categorías con mayor promedio de
 
 
    - Reducir campañas largas y concentrarse en períodos estratégicos de alto impacto.
+---
+
+# **Similitud entre productos - Data Science**
+
+---
+
+## **Introducción**
+
+En este análisis, se utilizó **Apache Spark** para calcular similitudes entre títulos de productos utilizando dos técnicas de embeddings: **TF-IDF** y **Word2Vec**. Al implementar este proceso en Spark, logramos una solución altamente escalable que puede manejar grandes volúmenes de datos, lo que lo hace ideal para aplicaciones en plataformas de comercio electrónico como Mercado Libre. 
+
+El análisis proporciona una base sólida para tareas como búsqueda de productos similares, agrupación semántica y recomendación de productos, permitiendo a las plataformas mejorar la experiencia del usuario y optimizar sus sistemas.
+
+---
+
+## **Proceso de Análisis**
+
+### **1. Escalabilidad con Spark**
+El análisis se diseñó para aprovechar la capacidad de procesamiento distribuido de Spark. Esto incluye:
+- **Procesamiento distribuido**:
+  - La tokenización, generación de embeddings y cálculo de similitudes se realizan en paralelo.
+- **Cruce cartesiano**:
+  - Se calcula la similitud entre todos los pares posibles de títulos mediante un cruce cartesiano eficiente en Spark.
+- **Reducción de tiempo de ejecución**:
+  - A pesar de manejar combinaciones complejas, Spark optimiza los cálculos distribuyendo las tareas.
+
+---
+
+### **2. Limpieza y Preprocesamiento de Datos**
+
+#### **Limpieza de Texto**
+Se elimina el ruido en los títulos mediante:
+- **Eliminación de tildes y caracteres especiales**:
+  - Se usa la biblioteca `unidecode` y expresiones regulares.
+- **Normalización**:
+  - Conversión a minúsculas y eliminación de espacios redundantes.
+
+---
+
+### **3. Generación de Embeddings**
+
+#### **TF-IDF (Term Frequency-Inverse Document Frequency)**
+- **Descripción**:
+  Representa los títulos como vectores ponderados, destacando palabras relevantes y minimizando el peso de palabras comunes.
+- **Ventajas**:
+  - Simple y eficiente.
+  - Ideal para capturar similitudes basadas en palabras compartidas.
+
+#### **Word2Vec**
+- **Descripción**:
+  Representa cada palabra como un vector en un espacio multidimensional, aprendiendo relaciones semánticas entre palabras.
+- **Ventajas**:
+  - Captura la semántica de las palabras, identificando similitudes más allá de las coincidencias exactas.
+
+---
+
+### **4. Cálculo de Similitudes**
+
+**Cómo se realiza**:
+- Se utiliza la **similitud del coseno** para evaluar qué tan relacionados están los títulos en el espacio vectorial.
+- El cálculo se realiza en Spark mediante un cruce cartesiano, permitiendo comparar todos los pares posibles de títulos entre los conjuntos de referencia y prueba.
+
+---
+
+### **5. Comparación de Resultados**
+
+Los resultados de similitudes generados por TF-IDF y Word2Vec se combinaron en un único conjunto para facilitar el análisis comparativo.
+
+#### **Ejemplo de Resultados**
+| **Título 1**                        | **Título 2**                        | **Similitud TF-IDF** | **Similitud Word2Vec** |
+|-------------------------------------|-------------------------------------|----------------------|-------------------------|
+| tênis olympikus esporte valente     | tênis olympikus esportivo academia  | 0.040                | 0.815                   |
+| bicicleta barra forte samy          | inteligente led bicicleta tauda luz | 0.000                | -0.13                   |
+
+---
+
+### **6. Evaluación de Tiempos**
+
+El tiempo de ejecución para cada técnica fue evaluado en dos etapas:
+1. **Generación de embeddings.**
+2. **Cálculo de similitudes.**
+
+#### **Resultados**
+- **TF-IDF** fue más rápido en la generación de embeddings.
+- **Word2Vec** destacó al capturar relaciones semánticas más profundas.
+
+#### **Gráfico Comparativo de Tiempos**
+> _ _
+![](012.JPG)
+
+---
+
+## **Próximos Pasos**
+
+1. **Evaluación de Precisión:**
+   - Validar la efectividad de cada técnica comparando las similitudes calculadas con etiquetas reales, como las categorías de productos.
+   - Determinar qué técnica identifica con mayor precisión productos que pertenecen a la misma categoría.
+
+2. **Optimización de Recursos:**
+   - Considerar la relación entre precisión y tiempo de ejecución al escalar el análisis a millones de títulos. En estos casos, incluso unos pocos segundos por cálculo pueden marcar una gran diferencia.
+
+3. **Ampliación del Modelo:**
+   - Incorporar datos adicionales, como descripciones, categorías o imágenes, para enriquecer el análisis.
+   - Explorar técnicas más avanzadas como embeddings preentrenados (e.g., BERT).
+
+---
+
+## **Conclusión**
+
+El análisis demostró cómo **Apache Spark** puede manejar eficientemente grandes volúmenes de datos para calcular similitudes entre títulos de productos. La comparación entre TF-IDF y Word2Vec resalta las fortalezas de cada técnica: mientras TF-IDF es más rápido, Word2Vec ofrece una mayor capacidad para capturar relaciones semánticas.
+
+Este enfoque no solo es escalable, sino que también establece las bases para sistemas avanzados de búsqueda y recomendación, optimizando la experiencia del usuario y mejorando la eficiencia operativa.
 
 ---
 
